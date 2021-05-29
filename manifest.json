@@ -1,0 +1,18 @@
+{
+    "name": "MiraiTranslate Search Extension",
+    "version": "1.0",
+    "description": "This extension opens Mirai in a new tab and autocompletes the selected test into the translation box.",
+    "manifest_version": 3,
+    "permissions": [
+        "contextMenus", "tabs"
+      ],
+    "icons": {
+        "16": "images/head_logo-16_x_16.png",
+        "32": "images/head_logo-32_x_32.png",
+        "48": "images/head_logo-48_x_48.png",
+        "128": "images/head_logo-128_x_128.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}
