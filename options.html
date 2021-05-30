@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="options.css">
+    <title>Mirai Extension Options</title>
+</head>
+<body>
+    <div class="container d-flex">
+        <h1>Extension options</h1>
+        <p>Changes are saved automatically!</p>
+        <div class="subcontainer">
+            <h3>Open MiraiTranslate in:</h3>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="tab-radio" name="open-radio" value="tab" class="custom-control-input" >
+                <label class="custom-control-label" for="tab-radio">A new tab</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="popup-radio" name="open-radio" value="popup" class="custom-control-input">
+                <label class="custom-control-label" for="popup-radio">A popup</label>
+            </div>
+        </div>
+        
+        <br>
+        <div class="subcontainer">
+            <h3>Select the language to translate to:</h3>
+            <div class="alert alert-danger" role="alert">
+                There is currently a bug on MiraiTraslate's website that reformats the URL to English if the 
+                site is accessed directly via the URL. This setting should work well once the issue is 
+                solved from Mirai's side.
+            </div>
+            <select class="custom-select" id="lang-select">
+                <option value="en" selected>English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="it">Italiano</option>
+                <option value="de">Deutsche</option>
+                <option value="pt">Português</option>
+                <option value="ru">Pусский</option>
+                <option value="id">Bahasa Indonesia</option>
+                <option value="th">ไทย</option>
+                <option value="vi">Tiếng Việt</option>
+                <option value="zh">中国人</option>
+                <option value="ko">한국어</option>
+            </select>
+        </div>
+
+        <div class="subcontainer links">
+            <a href="https://github.com/joeperpetua/mirai-extension/issues/new" target="_blank">Report a bug</a>
+            <a href="https://github.com/joeperpetua/mirai-extension" target="_blank">Mirai Extension on Github</a>
+            <a href="https://chrome.google.com/webstore/category/extensions" target="_blank">Mirai Extension on Google Chrome Web Store</a>
+        </div>
+    </div>
+    
+    <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+.container{
+    flex-direction: column;
+    align-items: center;
+    max-width: 60%;
+    margin-top: 5%;
+}
+
+.subcontainer{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.links{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10%;
+}
+
+.links a{
+    max-width: 30%;
+    text-align: center;
+}

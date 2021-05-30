@@ -4,7 +4,7 @@
     "description": "This extension opens Mirai in a new tab and autocompletes the selected test into the translation box.",
     "manifest_version": 3,
     "permissions": [
-        "contextMenus", "tabs"
+        "contextMenus", "tabs","storage"
       ],
     "icons": {
         "16": "images/head_logo-16_x_16.png",
@@ -12,6 +12,7 @@
         "48": "images/head_logo-48_x_48.png",
         "128": "images/head_logo-128_x_128.png"
     },
+    "options_page": "options.html",
     "background": {
         "service_worker": "background.js"
     }
