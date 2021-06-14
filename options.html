@@ -11,7 +11,7 @@
 <body>
     <div class="container d-flex">
         <h1>Extension options</h1>
-        <p>Changes are saved automatically!</p>
+        <p>Click on the save button to register the changes!</p>
         <div class="subcontainer">
             <h3>Open MiraiTranslate in:</h3>
             <div class="custom-control custom-radio">
@@ -27,11 +27,6 @@
         <br>
         <div class="subcontainer">
             <h3>Select the language to translate to:</h3>
-            <div class="alert alert-danger" role="alert">
-                There is currently a bug on MiraiTraslate's website that reformats the URL to English if the 
-                site is accessed directly via the URL. This setting should work well once the issue is 
-                solved from Mirai's side.
-            </div>
             <select class="custom-select" id="lang-select">
                 <option value="en" selected>English</option>
                 <option value="es">Español</option>
@@ -48,10 +43,16 @@
             </select>
         </div>
 
+        <br><br>
+        <div class="subcontainer">
+            <button type="button" class="btn btn-success">Save Changes</button>
+            <p class="text"></p>
+        </div>
+
         <div class="subcontainer links">
             <a href="https://github.com/joeperpetua/mirai-extension/issues/new" target="_blank">Report a bug</a>
+            <a href="https://chrome.google.com/webstore/detail/miraitranslate-search-ext/bjnbgbjhinhcafgfhhlonneeepmkggoo" target="_blank">Mirai Extension on Google Chrome Web Store</a>
             <a href="https://github.com/joeperpetua/mirai-extension" target="_blank">Mirai Extension on Github</a>
-            <a href="https://chrome.google.com/webstore/category/extensions" target="_blank">Mirai Extension on Google Chrome Web Store</a>
         </div>
     </div>
     

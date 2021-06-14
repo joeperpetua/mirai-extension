@@ -1,28 +1,23 @@
-let options = {
-    openTab: true,
-    searchLang: 'en'
-};
-
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({openTab: true, searchLang: 'en'});
 });
 
+// Where we will expose all the data we retrieve from storage.sync.
+const storageCache = {};
+// Asynchronously retrieve data from storage.sync, then cache it.
+const initStorageCache = getAllStorageSyncData().then(items => {
+  // Copy the data retrieved from storage into storageCache.
+  Object.assign(storageCache, items);
+});
+
+
+
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-        switch (key) {
-            case 'openTab':
-                options.openTab = newValue;
-                break;
-
-            case 'searchLang':
-                options.searchLang = newValue;
-                break;
-
-            default:
-                break;
-        }
-
-      // console.log(options.openTab, options.searchLang);
+        getAllStorageSyncData().then(items => {
+            // Copy the data retrieved from storage into storageCache.
+            Object.assign(storageCache, items);
+        }).catch(e => console.log(e));
     }
 });
 
@@ -33,10 +28,23 @@ chrome.contextMenus.create({
 });
 
 chrome.contextMenus.onClicked.addListener(async function(info, tab) {
-    if (info.menuItemId == "search") {
-        let miraiURL = `https://miraitranslate.com/trial/#ja/${options.searchLang}/${info.selectionText}`;
 
-        if (options.openTab) {
+    try {
+        await initStorageCache;
+        console.log(storageCache);
+    } catch (e) {
+        // Handle error that occurred during storage initialization.
+        console.log(e);
+    }
+      // Normal action handler logic.
+
+
+    if (info.menuItemId == "search") {
+        let miraiURL = `https://miraitranslate.com/trial/#ja/${storageCache.searchLang}/${info.selectionText}`;
+
+        console.log(storageCache.openTab, storageCache.searchLang);
+
+        if (storageCache.openTab) {
             // get all tabs
             await chrome.tabs.query({}, function(tabs) {
                 let alreadyExists = {
@@ -65,7 +73,7 @@ chrome.contextMenus.onClicked.addListener(async function(info, tab) {
                     chrome.tabs.create({
                         url: miraiURL
                     });
-                    console.log(miraiURL);
+                    // console.log(miraiURL);
                 }
             });
         }else{
@@ -74,10 +82,28 @@ chrome.contextMenus.onClicked.addListener(async function(info, tab) {
                 height: 640,
                 width: 640,
                 state:"normal",
-                incognito: true,
                 url: miraiURL
             });
         }
     }
 });
 
+
+// Reads all data out of storage.sync and exposes it via a promise.
+//
+// Note: Once the Storage API gains promise support, this function
+// can be greatly simplified.
+function getAllStorageSyncData() {
+    // Immediately return a promise and start asynchronous work
+    return new Promise((resolve, reject) => {
+      // Asynchronously fetch all data from storage.sync.
+      chrome.storage.sync.get(null, (items) => {
+        // Pass any observed errors down the promise chain.
+        if (chrome.runtime.lastError) {
+          return reject(chrome.runtime.lastError);
+        }
+        // Pass the data retrieved from storage down the promise chain.
+        resolve(items);
+      });
+    });
+}

@@ -3,6 +3,8 @@ let openRadio = document.querySelectorAll('input[name="open-radio"]');
 // let popupRadio = document.querySelector('#popup-radio');
 let langSelect = document.querySelector('#lang-select');
 
+let saveBtn = document.querySelector('.btn.btn-success');
+
 // initialize default values
 chrome.storage.sync.get(['openTab', 'searchLang'], function(result) {
 
@@ -19,24 +21,44 @@ chrome.storage.sync.get(['openTab', 'searchLang'], function(result) {
     }
 });
 
-openRadio[0].onchange = () => {
+saveBtn.onclick = () => {
+    let success = false;
     if (openRadio[0].checked === true) {
-        chrome.storage.sync.set({openTab: true});
-        chrome.storage.sync.get(['openTab'], result => console.log(result.openTab));
-    }
-};
+        chrome.storage.sync.set({openTab: true}, () => {
+            let confirmation = document.querySelector('.text');
+            confirmation.innerHTML = "The changes have been successfully saved";
 
-openRadio[1].onchange = () => {
+            setTimeout(() => {
+                confirmation.innerHTML = '';
+            }, 3000);
+        });
+        //chrome.storage.sync.get(['openTab'], result => console.log(result.openTab));
+    }
+
     if (openRadio[1].checked === true) {
-        chrome.storage.sync.set({openTab: false});
-        chrome.storage.sync.get(['openTab'], result => console.log(result.openTab));
+        chrome.storage.sync.set({openTab: false}, () => {
+            let confirmation = document.querySelector('.text');
+            confirmation.innerHTML = "The changes have been successfully saved";
+
+            setTimeout(() => {
+                confirmation.innerHTML = '';
+            }, 3000);
+            });
+        //chrome.storage.sync.get(['openTab'], result => console.log(result.openTab));
     }
+
+    chrome.storage.sync.set({searchLang: langSelect.value}, () => {
+        let confirmation = document.querySelector('.text');
+        confirmation.innerHTML = "The changes have been successfully saved";
+
+        setTimeout(() => {
+            confirmation.innerHTML = '';
+        }, 3000);
+    });
+    //chrome.storage.sync.get(['searchLang'], result => console.log(result.searchLang));console.log(success);
+    
 };
 
-langSelect.onchange = () => {
-    chrome.storage.sync.set({searchLang: langSelect.value});
-    chrome.storage.sync.get(['searchLang'], result => console.log(result.searchLang));
-};
 
 
 
