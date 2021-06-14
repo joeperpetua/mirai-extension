@@ -1,6 +1,6 @@
 {
     "name": "MiraiTranslate Search Extension",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "This extension opens Mirai in a new tab and autocompletes the selected text into the translation box.",
     "manifest_version": 3,
     "permissions": [
