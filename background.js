@@ -31,7 +31,7 @@ chrome.contextMenus.onClicked.addListener(async function(info, tab) {
 
     try {
         await initStorageCache;
-        console.log(storageCache);
+        // console.log(storageCache);
     } catch (e) {
         // Handle error that occurred during storage initialization.
         console.log(e);
@@ -42,7 +42,7 @@ chrome.contextMenus.onClicked.addListener(async function(info, tab) {
     if (info.menuItemId == "search") {
         let miraiURL = `https://miraitranslate.com/trial/#ja/${storageCache.searchLang}/${info.selectionText}`;
 
-        console.log(storageCache.openTab, storageCache.searchLang);
+        // console.log(storageCache.openTab, storageCache.searchLang);
 
         if (storageCache.openTab) {
             // get all tabs
@@ -68,7 +68,7 @@ chrome.contextMenus.onClicked.addListener(async function(info, tab) {
                     chrome.tabs.create({
                         url: miraiURL
                     });
-                    console.log(miraiURL);
+                    // console.log(miraiURL);
                 }else{
                     chrome.tabs.create({
                         url: miraiURL
